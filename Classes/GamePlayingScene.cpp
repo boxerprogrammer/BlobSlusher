@@ -152,7 +152,7 @@ Scene* GamePlaying::createScene()
 	auto scene = Scene::createWithPhysics();
 	scene->getPhysicsWorld()->setAutoStep(true);
 	scene->getPhysicsWorld()->setGravity(Vec2(0,-198));
-	//scene->getPhysicsWorld()->setDebugDrawMask(0xff);//デバッグ用
+	scene->getPhysicsWorld()->setDebugDrawMask(0xff);//デバッグ用
     
 	// 'layer' is an autorelease object
 	auto layer = GamePlaying::create();
@@ -286,11 +286,14 @@ GamePlaying::ObjectLayerParse(TMXObjectGroup* og,int& priority ){
 			if(rot!=map.end()){
 				angle = rot->second.asFloat();
 			}
-			
-			boardnode->setPosition(pos+Vec2(size.width/2,size.height/2).rotate(Vec2::forAngle(-angle*M_PI/180.0f)));
+
 			boardnode->setPhysicsBody(board);
-			boardnode->setRotation(angle);
 			board->setDynamic(false);
+			board->setRotationEnable(false);
+			//board->setRotationOffset(angle);
+			boardnode->setPosition(pos+Vec2(size.width/2,size.height/2).rotate(Vec2::forAngle(-angle*M_PI/180.0f)));
+			boardnode->setRotation(angle);
+			
 			addChild(boardnode);
 		}
 	}
@@ -530,7 +533,6 @@ bool GamePlaying::init()
 
 	Vector<TMXTilesetInfo*>& tileset = mapinfo->getTilesets();
 	TMXTilesetInfo* ts= tileset.at(0);
-	ts->_sourceImage;
 	
 	ObjectLayerParse(tiledmap->getObjectGroup("cuttable"),priority);
 	ObjectLayerParse(tiledmap->getObjectGroup("scaffold"),priority);
