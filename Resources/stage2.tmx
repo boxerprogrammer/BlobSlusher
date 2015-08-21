@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="20" height="20" tilewidth="32" tileheight="32">
+ <tileset firstgid="1" name="soniko" tilewidth="32" tileheight="32">
+  <image source="soniko.png" width="299" height="500"/>
+ </tileset>
+ <imagelayer name="image" x="72" y="64" visible="0">
+  <image source="soniko.png"/>
+ </imagelayer>
+ <layer name="tile" width="20" height="20">
+  <data encoding="base64" compression="zlib">
+   eJzlzFc3EGAAgGEjUpFRElF2pWTLClnZMkLZe49klUKh/nbPX/guHe85z+0bEXE9iiSKaG4RQyy3ieNO4O8u94gngfskkkQyKYG/BzwklUek8Zh0MngS+Mski6c8I5sccskjP/BXQCHPecFLinjFa4oDf28ooZQyyqmgkiqqA39vqaGWOupp4B2NNAX+mnlPC6200U4HH+gM/HXRTQ+99NHPAB8ZDPwNMcwInxhljHE+8yXwN8EkU0wzwyxzzLMQ+FtkiWVWWGWNdTbYDPxtsc0Ou3xlj2/scxD4O+SIY77zgxN+8ovTwN8Z5/zmDxdccsVf/gX+bkr/ATW0I90=
+  </data>
+ </layer>
+ <objectgroup name="cuttable" opacity="0.97">
+  <object name="brick" type="cuttable" x="151" y="228">
+   <polygon points="74,-37 200,91 75,217 -54,95"/>
+  </object>
+ </objectgroup>
+ <objectgroup name="scaffold">
+  <object name="block" type="scaffold" x="94.7201" y="324.882" width="85.8283" height="28.7936" rotation="-317"/>
+  <object name="block" type="scaffold" x="291.675" y="381.983" width="85.4938" height="31.9418" rotation="-45.1727"/>
+ </objectgroup>
+</map>

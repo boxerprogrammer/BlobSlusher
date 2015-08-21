@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="20" height="20" tilewidth="32" tileheight="32">
+ <tileset firstgid="1" name="soniko" tilewidth="32" tileheight="32">
+  <image source="soniko.png" width="299" height="500"/>
+ </tileset>
+ <imagelayer name="girl" x="92" y="63">
+  <image source="soniko.png"/>
+ </imagelayer>
+ <objectgroup name="cuttable" opacity="0.97">
+  <object name="brick" type="cuttable" x="166" y="228">
+   <polygon points="0,0 138,-1 138,219 -1,219"/>
+  </object>
+  <object type="cuttable" x="97.3333" y="200.667">
+   <polygon points="0,25 144,-133.667 278.333,22.6667"/>
+  </object>
+ </objectgroup>
+ <objectgroup name="scaffold">
+  <object name="block" type="scaffold" x="121.536" y="451.118" width="229" height="29"/>
+  <object name="block" type="scaffold" x="279.978" y="595.901" width="229" height="29" rotation="-35.7483"/>
+ </objectgroup>
+</map>

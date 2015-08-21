@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="20" height="20" tilewidth="32" tileheight="32">
+ <tileset firstgid="1" name="soniko" tilewidth="32" tileheight="32">
+  <image source="soniko.png" width="299" height="500"/>
+ </tileset>
+ <imagelayer name="image" x="72" y="64">
+  <image source="soniko.png"/>
+ </imagelayer>
+ <objectgroup name="cuttable" opacity="0.97">
+  <object name="brick" type="cuttable" x="146" y="221">
+   <polygon points="24,-38 147,-36 144,156 23,154"/>
+  </object>
+ </objectgroup>
+ <objectgroup name="scaffold">
+  <object name="block" type="scaffold" x="176.72" y="377.882" width="21.8283" height="21.7936"/>
+  <object name="block" type="scaffold" x="249.675" y="378.983" width="20.4938" height="19.9418"/>
+  <object type="scaffold" x="146" y="209" width="22" height="23"/>
+  <object type="scaffold" x="295" y="211" width="23" height="23"/>
+  <object type="scaffold" x="146" y="289.5" width="20" height="22"/>
+  <object type="scaffold" x="295" y="289.5" width="23" height="23"/>
+ </objectgroup>
+</map>
