@@ -471,7 +471,7 @@ bool GamePlaying::init()
 	TMXTiledMap* tiledmap;
 	TMXMapInfo* mapinfo;
 	if(stage_no==0){
-		_slushLimit=1;
+		_slushLimit=10;
 		auto label = LabelTTF::create(GetUTF8FromSJIS("チャンスは１度きり…"), "Arial", 24);
 		// position the label on the center of the screen
 		label->setPosition(Vec2(origin.x + visibleSize.width/2,
@@ -691,18 +691,18 @@ GamePlaying::onTouchEnded(Touch* t,Event* ev){
 			if(j==cps->numVerts-1){
 				flg=IsIntersected(_touchedPos,
 					t->getLocation(),
-					Vec2(cps->verts[j].x,cps->verts[j].y)+polyPos,
-					Vec2(cps->verts[0].x,cps->verts[0].y)+polyPos);
+					Vec2(cps->tVerts[j].x,cps->tVerts[j].y),
+					Vec2(cps->tVerts[0].x,cps->tVerts[0].y));
 				if(flg){
 					PosUv posuv;
 					posuv.pos = IntersectedPoint(_touchedPos,
 								t->getLocation(),
-								Vec2(cps->verts[j].x,cps->verts[j].y)+polyPos,
-								Vec2(cps->verts[0].x,cps->verts[0].y)+polyPos);
+								Vec2(cps->tVerts[j].x,cps->tVerts[j].y),
+								Vec2(cps->tVerts[0].x,cps->tVerts[0].y));
 					//とりあえずvertsのインデックスとp.vertices,p.uvsのインデクスが同一であると仮定する。
 					posuv.uv = GetMidUV(Vec2(cps->verts[j].x,cps->verts[j].y)+polyPos,
 						p.uvs[j],
-						Vec2(cps->verts[0].x,cps->verts[0].y)+polyPos,
+						Vec2(cps->tVerts[0].x,cps->tVerts[0].y),
 						p.uvs[0],
 						posuv.pos);
 					p.cutEdges.push_back(std::make_pair(j,posuv));//インデックスとuv&posのペア
@@ -712,18 +712,18 @@ GamePlaying::onTouchEnded(Touch* t,Event* ev){
 			}else{
 				flg=IsIntersected(_touchedPos,
 					t->getLocation(),
-					Vec2(cps->verts[j].x,cps->verts[j].y)+polyPos,
-					Vec2(cps->verts[j+1].x,cps->verts[j+1].y)+polyPos);
+					Vec2(cps->tVerts[j].x,cps->tVerts[j].y),
+					Vec2(cps->tVerts[j+1].x,cps->tVerts[j+1].y));
 				if(flg){
 					PosUv posuv;
 					posuv.pos =IntersectedPoint(_touchedPos,
 								t->getLocation(),
-								Vec2(cps->verts[j].x,cps->verts[j].y)+polyPos,
-								Vec2(cps->verts[j+1].x,cps->verts[j+1].y)+polyPos);
+								Vec2(cps->tVerts[j].x,cps->tVerts[j].y),
+								Vec2(cps->tVerts[j+1].x,cps->tVerts[j+1].y));
 					//とりあえずvertsのインデックスとp.vertices,p.uvsのインデクスが同一であると仮定する。
-					posuv.uv = GetMidUV(Vec2(cps->verts[j].x,cps->verts[j].y)+polyPos,
+					posuv.uv = GetMidUV(Vec2(cps->tVerts[j].x,cps->tVerts[j].y),
 						p.uvs[j],
-						Vec2(cps->verts[j+1].x,cps->verts[j+1].y)+polyPos,
+						Vec2(cps->tVerts[j+1].x,cps->tVerts[j+1].y),
 						p.uvs[j+1],
 						posuv.pos);
 					p.cutEdges.push_back(std::make_pair(j,posuv));
@@ -794,8 +794,8 @@ GamePlaying::onTouchEnded(Touch* t,Event* ev){
 		poly.uvs.push_back(p.cutEdges[0].second.uv);//切断端点
 		for(int i=1;i<=diff;++i){
 			int idx=p.cutEdges[0].first+i;
-			cpVect& ve=cps->verts[idx];//元の座標を利用
-			newpos = Vec2(ve.x,ve.y);
+			cpVect& ve=cps->tVerts[idx];//元の座標を利用
+			newpos = Vec2(ve.x,ve.y)-polyPos;
 			poly.vertices.push_back(newpos);
 			poly.uvs.push_back(tmpUvs[idx]);
 		}
@@ -817,8 +817,8 @@ GamePlaying::onTouchEnded(Touch* t,Event* ev){
 		poly.uvs.push_back(p.cutEdges[1].second.uv);//切断端点
 		for(int i=1;i<=diff;++i){
 			int idx = (p.cutEdges[1].first+i)%p.vertices.size();
-			cpVect& ve=cps->verts[idx];//元の座標を利用
-			newpos = Vec2(ve.x,ve.y);
+			cpVect& ve=cps->tVerts[idx];//元の座標を利用
+			newpos = Vec2(ve.x,ve.y)-polyPos;
 			poly.vertices.push_back(newpos);
 			poly.uvs.push_back(tmpUvs[idx]);
 		}
